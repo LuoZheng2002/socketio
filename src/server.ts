@@ -14,7 +14,11 @@ const handler = app.getRequestHandler();
 app.prepare().then(() => {
     console.log('Creating socket.io server.');
     const httpServer = createServer(handler);
-    const io = new Server(httpServer);
+    const io = new Server(httpServer, {
+        cors:{
+            origin: "*"
+        }
+    });
 
     let num = 0;
 
