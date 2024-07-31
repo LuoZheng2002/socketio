@@ -28,7 +28,7 @@ app.prepare().then(() => {
         console.log('sending a message');
         setTimeout(count, 1000);
     }
-    count();
+    // count();
 
 
     

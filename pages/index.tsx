@@ -1,24 +1,34 @@
 import Game from "@/components/game";
+import Signedin from "@/components/signedin";
+import Signin from "@/components/signin";
 import { useEffect, useRef, useState } from "react"
 import { io, Socket } from "socket.io-client";
 
 
 export default function Home() {
-
-  const socketRef = useRef(null as Socket | null);
-  const [count,setCount] = useState(0);
-  useEffect(() => {
-    const socket = io();
-    socketRef.current = socket;
-    // Handle the response event from the server
-    socket.on('message', (data) => {
-      setCount(data);
-    });
-  }, []);
+  
+  // socket, id, nickname (obtained after log in)
+  const [scene, setScene] = useState('signin');
+  const usernameRef = useRef('');
+  const setUsername = (username: string)=>{
+    usernameRef.current = username;
+  }
+  
+  const renderComponent = ()=>{
+    switch (scene) {
+      case 'signin':
+        return <Signin></Signin>;
+      case 'signedin':
+        return <Signedin></Signedin>;
+      default:
+        console.log('Unknown scene at index.tsx');
+        return <Signin></Signin>;
+      }
+  }
+  
   return (
-    <div className="text-3xl font-bold underline">
-      <div>Count: { count}</div>
-      <Game></Game>
+    <div className="w-screen h-screen bg-blue-500">
+      {renderComponent()}
     </div>
   )
 }
