@@ -1,7 +1,7 @@
 // pages/api/auth/signin.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import dbConnect from 'database/mongodb';
-import User from 'database/User';
+import dbConnect from '@/mongoose/middleware';
+import User from '@/mongoose/User';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await dbConnect();
